@@ -60,7 +60,7 @@ for(int j=0;j<3-i-1;j++){
 }
 for(int i=0;i<3;i++){
     
-        cout<<"after sorting"<<"\t"<<arr[i].roll_no;
+        cout<<"\t"<<arr[i].roll_no;
     
 }
 }
@@ -72,18 +72,45 @@ int searchRecords(student arr[]){
     for(int i;i<3;i++){
     if(rollno==arr[i].getrollnumber()){
         return i;
-    }}
+    }    
+    }
 } 
 
 
 int main(){
 
  student s1[3];
-s1[0].accept();
-s1[1].accept();
 
-s1[2].accept();
+int ch;
+do{  
+    cout<<"***************************"<<endl;
+    cout<<"enter 0 for exit"<<endl;
+    cout<<"enter 1 for accepting details"<<endl;
+    cout<<"enter 2 for printing details"<<endl;
+    cout<<"enter 3 for sorting roll no"<<endl;
+    cout<<"enter 4 for searching"<<endl;
+    cout<<"enter the choice";
+    cin>>ch;
+  switch(ch){
+    case 1:s1[0].accept();
+           s1[1].accept();
+           s1[2].accept();
+    break;
 
-//cout<<"check"<<searchRecords(s1);
-sortRecords(s1);
+    case 2:s1[0].print();
+           s1[1].print();
+           s1[2].print();
+    break;
+    case 3:sortRecords(s1);
+    break;
+    case 4:cout<<"check"<<searchRecords(s1);
+    break;
+    default:cout<<"galat choice hai "<<endl;
+    break;
+  }
+
+}while(ch!=0);
+
+return 0;
+
 }
