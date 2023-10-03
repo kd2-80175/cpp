@@ -1,5 +1,42 @@
 #include<iostream>
 using namespace std;
+template <class M>
+class Box{
+    private:
+    int length;
+    int width;
+    int height;
+    int vol;
+    public:
+    
+Box(){
+
+}
+    Box(int length,int width,int height){
+        this->length=length;
+        this->width=width;
+        this->height=height;
+    }
+
+    void accept(){
+        cout<<"length:";
+        cin>>length;
+        cout<<"width:";
+        cin>>width;
+        cout<<"height:";
+        cin>>height;
+    }
+void display(){
+    cout<<"the length is:"<<length<<"\n";
+    cout<<"the width is:"<<width<<"\n";
+    cout<<"the height is:"<<height<<"\n";
+}
+void volume(){
+    int vol=length*width*height;
+    cout<<"the volume is:"<<vol;
+
+}
+};
 template <class T>
 class Stack{
     private:
@@ -44,9 +81,13 @@ class Stack{
 
 };
 int main(){
-Stack s1(5);
+Stack <int> s1(5);
 s1.push(5);
 s1.peek();
+s1.isEmpty();
+Stack <int> s2(5);
+Stack <box> s3;
+
 
 
 }

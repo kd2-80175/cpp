@@ -2,6 +2,7 @@
 Provide additional facility to
 display all accounts in forward and reverse order using iterators.*/
 #include <iostream>
+#include <vector>
 using namespace std;
 enum account_type
 {
@@ -126,19 +127,19 @@ public:
     void deposit(double amount)
     {
         balance = balance + amount;
-        cout << "the balance is: " << balance<<endl;
+        cout << "the balance is: " << balance << endl;
     }
     void withdraw(double amount)
     {
-        
+
         if (amount > this->balance)
         {
-            throw fund(this->id,this->balance ,amount);
+            throw fund(this->id, this->balance, amount);
         }
         else
         {
             balance = balance - amount;
-            cout << "the balance is: " << balance<<endl;
+            cout << "the balance is: " << balance << endl;
         }
     }
 };
@@ -152,6 +153,7 @@ int menu1()
     cout << "2. for deposit" << endl;
     cout << "3. for display" << endl;
     cout << "4.for withdraw" << endl;
+    cout << "5. for reverse" << endl;
     cout << "enter your choice: ";
     cin >> choice;
     cout << "_________________" << endl;
@@ -159,10 +161,9 @@ int menu1()
 }
 int main()
 {
-    Account *account[5];
-
-    int id;
     int choice;
+    vector<Account *> empList;
+    int id;
     double amount;
     while ((choice = menu1()) != 0)
     {
@@ -170,51 +171,59 @@ int main()
         switch (choice)
         {
         case 1:
-            for (int i = 0; i < 5; i++)
-            {
-                account[i] = new Account();
-                account[i]->accept();
-            }
-            break;
+        {
+            Account *eptr = new Account();
+            eptr->accept();
+            empList.push_back(eptr);
+        }
+        break;
         case 2:
             cout << "enter the id";
             cin >> id;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < empList.size(); i++)
             {
 
-                if (id == account[i]->get_id())
+                if (id == empList.at(i)->get_id())
                 {
                     cout << "enter the amount";
                     cin >> amount;
-                    account[i]->deposit(amount);
+                    empList.at(i)->deposit(amount);
                 }
             }
             break;
         case 3:
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < empList.size(); i++)
             {
-                account[i]->display();
+                empList.at(i)->display();
             }
             break;
         case 4:
-        cout << "enter the id";
+            cout << "enter the id";
             cin >> id;
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < empList.size(); i++)
             {
 
-                if (id == account[i]->get_id())
+                if (id == empList.at(i)->get_id())
                 {
                     cout << "enter the amount";
                     cin >> amount;
-                    try{
-                    account[i]->withdraw(amount);
+                    try
+                    {
+                        empList.at(i)->withdraw(amount);
                     }
-                    catch(fund e){
+                    catch (fund e)
+                    {
                         e.display();
                     }
                 }
             }
             break;
+           case 5:
+                    for(int i=empList.size()-1;i>=0;i--){
+                          empList[i]->display();
+                     } 
+                   cout<<endl;    
+            break;  
         default:
             cout << "wrong choice" << endl;
             break;
